@@ -4,7 +4,7 @@
 ##### _Tudo isso usando a cifra de César, gostei tanto que queria testar com outras criptografias, por isso deste repositório_
 
 ## Pretendo conseguir usar todas essas criptografias
-- [x] Criptografia de cesar
+- [x] Cifra de cesar
 - [x] RSA
 - [ ] DES
 - [ ] AES
