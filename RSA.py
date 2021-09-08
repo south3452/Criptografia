@@ -1,6 +1,10 @@
 import random
 import string
 
+#Cores do Terminal
+reset_color = "\033[0m"
+red = "\033[31m"
+
 #definir numeros aleatórios
 def randomnumber():
     while 1:
@@ -54,18 +58,61 @@ def primosentresi(a,b):
                 except:
                     return True
 
-#definir valor de dois primos
-num = doisprimos()
-#definir valor de p
-p = num[0]
-#definir valor de q
-q = num[1]
-#se p e q forem iguais mudar os valores para ficarem diferentes
-while 1:
-    if p == q:
-        q = doisprimos()[0]
+def verificaprimos(a):
+    i = 2
+    while i < a: 
+        if(a%i) == 0:
+            return False
+        i+=1
     else:
+        return True
+
+
+print("Quer escolher os primos ou deixar eles gerarem aleatoriamente?")
+print("OBS: os numeros gerados aleatoriamente podem ser grandes quanto maior o numero mais demorado o cálculo para criptografar/desciptografar variando de CPU para CPU")
+print("1) Inserir primos")
+print("2) Gerar aleatórios")
+
+while 1:
+    try:
+        while 1:
+            escolha = int(input("Escolha uma opção:"))
+            if escolha == 1 or escolha == 2: 
+                break
+            else: 
+                print(red + 'Escolha apenas 1 ou 2' + reset_color)
         break
+    except:
+        print(red + 'Escolha apenas numeros' + reset_color )
+
+if escolha == 1:
+    while 1:
+        p = int(input("Insira um numero primo:"))
+        if verificaprimos(p) == True:
+            break
+        else:
+            print(red + "O numero ",p, "não é primo!" + reset_color)
+            print(red + "Escolha um numero que é primo" + reset_color)
+    while 1:
+        q = int(input("Insira um numero primo:"))
+        if verificaprimos(q) == True:
+            break
+        else:
+            print(red + "O numero ",q, "não é primo!" + reset_color)
+            print(red + "Escolha um numero que é primo" + reset_color)
+else:
+    #definir valor de dois primos
+    num = doisprimos()
+    #definir valor de p
+    p = num[0]
+    #definir valor de q
+    q = num[1]
+    #se p e q forem iguais mudar os valores para ficarem diferentes
+    while 1:
+        if p == q:
+            q = doisprimos()[0]
+        else:
+            break
 
 #Definir valor de n 
 n = p*q
@@ -140,7 +187,7 @@ for i in cifrada:
         conta = (int(i)**d) % n
         decifrada.append(alfa[conta])
 
-input("CALMA LÁ")
+input("Aperte [ENTER] para descptografar o arquivo")
 
 arquivo = open('teste.txt', 'w')
 arquivo.write(''.join(decifrada))
