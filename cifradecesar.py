@@ -13,7 +13,8 @@ while True:
 
 
 #salvando o alfabeto em lista
-alfabeto = string.ascii_lowercase
+alfabeto = string.printable
+alfabeto = list(alfabeto)
 Alfabeto = string.ascii_uppercase
 pontos = string.punctuation
 num = string.digits
@@ -27,6 +28,13 @@ def doisemum(params):
 
     newlist = list()
 
+    for x in range(len(file)):
+        for y in file[x]:
+            try:
+                alfabeto.index(y)
+            except:
+                alfabeto.append(y)
+
     #Aplicando a cifra e salvando em uma lista 
     for x in range(len(file)):
         for y in file[x]:
@@ -35,36 +43,14 @@ def doisemum(params):
             elif y == '\n':
                 newlist.append('\n')
             else:
-                try:
-                    #des é de descriptografar
-                    if params == 'des':
-                        cifra = (alfabeto.index(y) - variacao) % 26
-                    else:
-                        cifra = (alfabeto.index(y) + variacao) % 26
-                    newlist.append(alfabeto[cifra])
-                except ValueError:
-                    try:
-                        if params == 'des':
-                            cifra = (Alfabeto.index(y) - variacao) % 26
-                        else:
-                            cifra = (Alfabeto.index(y) + variacao) % 26
-                        newlist.append(Alfabeto[cifra])
-                    except ValueError:
-                        try:
-                            if params == 'des':
-                                cifra = (pontos.index(y) - variacao) % 32
-                            else:
-                                cifra = (pontos.index(y) + variacao) % 32
-                            newlist.append(pontos[cifra])
-                        except ValueError:
-                            try:
-                                if params == 'des':
-                                    cifra = (num.index(y) - variacao) % 10
-                                else:
-                                    cifra = (num.index(y) + variacao) % 10
-                                newlist.append(num[cifra])
-                            except:
-                                print("Teste")
+                #des é de descriptografar
+                if params == 'des':
+                    cifra = (alfabeto.index(y) - variacao) % len(alfabeto)
+                else:
+                    cifra = (alfabeto.index(y) + variacao) % len(alfabeto)
+                newlist.append(alfabeto[cifra])
+
+                    
     arquivo = open('teste.txt', 'w')
     arquivo.write(''.join(newlist))
     arquivo.close()
