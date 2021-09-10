@@ -1,3 +1,7 @@
+'''
+Lucas Venancio Coutinho
+Atividade Development For Security
+'''
 import string
 import time
 import sys
@@ -30,14 +34,6 @@ def doisemum(params):
 
     newlist = list()
 
-    #Adicionando Caracteres que não estão no alfabeto na variavel alfabeto
-    for x in range(len(file)):
-        for y in file[x]:
-            try:
-                alfabeto.index(y)
-            except:
-                alfabeto.append(y)
-
     #Aplicando a cifra e salvando em uma lista 
     for x in range(len(file)):
         for y in file[x]:
@@ -48,10 +44,10 @@ def doisemum(params):
             else:
                 #des é de descriptografar
                 if params == 'des':
-                    cifra = (alfabeto.index(y) - variacao) % len(alfabeto)
+                    cifra = (ord(y) - variacao)
                 else:
-                    cifra = (alfabeto.index(y) + variacao) % len(alfabeto)
-                newlist.append(alfabeto[cifra])
+                    cifra = (ord(y) + variacao)
+                newlist.append(chr(cifra))
     #abrir e escrever o conteudo no arquivo
     arquivo = open('teste.txt', 'w')
     arquivo.write(''.join(newlist))
