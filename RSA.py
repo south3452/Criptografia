@@ -139,12 +139,11 @@ def achad(e, totiente):
 
 d = achad(e,phi)
 
-print("p: ",p)
-print("q: ",q)
-print("n: ",n)
-print("phi de n: ",phi)
-print("e: ",e)
-print("d:", d)
+print(20*"-")
+print('Chave Publica(n,e)')
+print(f'A chave publica é: {n},{e}')
+print('Chave Privada(d)')
+print(f'A chave privada é: {d}')
 
 
 arquivo = open("teste.txt", "r")
@@ -162,11 +161,9 @@ for i in file:
     if i == '\n':
         cifrada.append('\n')
     else:
-        try:
-            cifrada.append(str(((alfa.index(i)) ** e) % n) + ' ')
-        except ValueError:
-            alfa.append(i)
-            cifrada.append(str(((alfa.index(i)) ** e) % n) + ' ')
+        cifrada.append(chr(((ord(i)) ** e) % n))
+
+print("Seu aquivo foi Criptografado, de uma olhada nele")
 
 '''
 arquivo = open('teste.txt', 'w')
@@ -179,13 +176,18 @@ arquivo.write(''.join(cifrada))
 arquivo.close()
 
 decifrada = list()
+
 #decifrar mensagem
-for i in cifrada:
+arquivo = open("teste.txt", "r")
+file = arquivo.read()
+arquivo.close()
+
+for i in file:
     if i == '\n':
         decifrada.append('\n')
     else:
-        conta = (int(i)**d) % n
-        decifrada.append(alfa[conta])
+        conta = (ord(i)**d) % n
+        decifrada.append(chr(conta))
 
 input("Aperte [ENTER] para descptografar o arquivo")
 
