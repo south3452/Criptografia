@@ -10,6 +10,7 @@
 - [ ] AES
 - [ ] Blowfish  
 
+**OBS: queria também tentar implementar algum algoritimo de HASH, como MD5 por exemplo**
 
 
 ## Todos os arquivos terão a seguinte estrutura:
